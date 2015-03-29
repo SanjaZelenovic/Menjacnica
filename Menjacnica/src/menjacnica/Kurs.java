@@ -49,5 +49,53 @@ private GregorianCalendar datum;
 		return srednjiK;
 	}
 
+	@Override
+	public String toString() {
+		return "Kurs [datum=" + datum + ", prodajniK=" + prodajniK
+				+ ", kupovniK=" + kupovniK + ", srednjiK=" + srednjiK + "]";
+	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((datum == null) ? 0 : datum.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(kupovniK);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(prodajniK);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(srednjiK);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Kurs other = (Kurs) obj;
+		if (datum == null) {
+			if (other.datum != null)
+				return false;
+		} else if (!datum.equals(other.datum))
+			return false;
+		if (Double.doubleToLongBits(kupovniK) != Double
+				.doubleToLongBits(other.kupovniK))
+			return false;
+		if (Double.doubleToLongBits(prodajniK) != Double
+				.doubleToLongBits(other.prodajniK))
+			return false;
+		if (Double.doubleToLongBits(srednjiK) != Double
+				.doubleToLongBits(other.srednjiK))
+			return false;
+		return true;
+	}
+
+	
+	
 }

@@ -23,27 +23,35 @@ private GregorianCalendar datum;
 		return datum;
 	}
 
-	public void setDatum(GregorianCalendar datum) {
-		this.datum = datum;
+	public void setDatum(GregorianCalendar datum) throws RuntimeException {
+		if ( datum != null ) this.datum = datum;
+		else throw new RuntimeException("Datum ne sme biti null.");
 	}
+
 
 	public double getProdajniK() {
 		return prodajniK;
 	}
 
-	public void setProdajniK(double prodajniK) {
-		this.prodajniK = prodajniK;
-		srednjiK = (prodajniK+kupovniK)/2.0;
+	public void setProdajniK(double prodajniK) throws RuntimeException {
+		if (prodajniK > 0 ) {
+			this.prodajniK = prodajniK;
+			srednjiK = (prodajniK+kupovniK)/2.0;
+		} else throw new RuntimeException("Prodajni kurs ne sme imati negativnu vrednost.");
 	}
+
 
 	public double getKupovniK() {
 		return kupovniK;
 	}
 
-	public void setKupovniK(double kupovniK) {
-		this.kupovniK = kupovniK;
-		srednjiK = (prodajniK+kupovniK)/2.0;
+	public void setKupovniK(double kupovniK) throws RuntimeException {
+		if (kupovniK > 0 ) {
+			this.kupovniK = kupovniK;
+			srednjiK = (prodajniK+kupovniK)/2.0;
+		} else throw new RuntimeException("Kupovni kurs ne sme imati negativnu vrednost.");
 	}
+
 
 	public double getSrednjiK() {
 		return srednjiK;

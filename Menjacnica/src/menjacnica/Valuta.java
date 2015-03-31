@@ -22,17 +22,21 @@ public class Valuta {
 		return naziv;
 	}
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
+	public void setNaziv(String naziv) throws RuntimeException {
+		if ( naziv != null && naziv != "" ) this.naziv = naziv;
+		else throw new RuntimeException("Naziv valute ne sme biti null, niti prazan String.");
 	}
+
 
 	public String getSkraceniNaziv() {
 		return skraceniNaziv;
 	}
 
-	public void setSkraceniNaziv(String skraceniNaziv) {
-		this.skraceniNaziv = skraceniNaziv;
+	public void setSkraceniNaziv(String skraceniNaziv) throws RuntimeException {
+		if ( skraceniNaziv != null && skraceniNaziv != "" ) this.skraceniNaziv = skraceniNaziv;
+		else throw new RuntimeException("Skraceni naziv valute ne sme biti null, niti prazan String.");
 	}
+
 
 	@Override
 	public String toString() {

@@ -17,29 +17,81 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		
 		for (int i = 0; i < valute.size() ; i++) {
 			
-			for (int j = 0; j < valute.get(i).kursevi.size(); j++) {
+
+			if ( valute.get(i).getNaziv().equals(nazivValute) ) {
 				
-				if ( valute.get(i).getNaziv().equals(nazivValute) && valute.get(i).kursevi.get(j).getDatum().equals(dat)) {
+				for (int j = 0; j < valute.get(i).kursevi.size(); j++) {
 					
-					valute.get(i).kursevi.get(j).setKupovniK(kupovniKurs);
-					valute.get(i).kursevi.get(j).setProdajniK(prodajniKurs);
-					
-					return;
+					if ( valute.get(i).kursevi.get(j).getDatum().equals(dat) ) {
+						
+						valute.get(i).kursevi.get(j).setKupovniK(kupovniKurs);
+						valute.get(i).kursevi.get(j).setProdajniK(prodajniKurs);
+						
+						return;
+						
+					}
 					
 				}
-				
 			}
-			
 		}
-
 	}
+
 
 	public void obrisiKurs(GregorianCalendar dat, String nazivValute) {
-		
+
+		for (int i = 0; i < valute.size() ; i++) {
+			
+			if ( valute.get(i).getNaziv().equals(nazivValute) ) {
+				
+				for (int j = 0; j < valute.get(i).kursevi.size(); j++) {
+					
+					if ( valute.get(i).kursevi.get(j).getDatum().equals(dat) ) {
+						
+						valute.get(i).kursevi.get(j).setKupovniK(0);
+						valute.get(i).kursevi.get(j).setProdajniK(0);
+						
+						return;
+						
+					}
+				}
+			}
+		}
+			
 	}
+		
+
 
 	public double[] vratiKurs(GregorianCalendar dat, String nazivValute) {
-		return null;
+		
+		double [] kps = new double [3];
+		
+		for (int i = 0; i < valute.size() ; i++) {
+			
+			if ( valute.get(i).getNaziv().equals(nazivValute) ) {
+				
+				for (int j = 0; j < valute.get(i).kursevi.size(); j++) {
+					
+					if ( valute.get(i).kursevi.get(j).getDatum().equals(dat)) {
+						
+						double kupovni =  valute.get(i).kursevi.get(j).getKupovniK();
+						double prodajni = valute.get(i).kursevi.get(j).getProdajniK();
+						double srednji = valute.get(i).kursevi.get(j).getSrednjiK();
+
+						kps[0] = kupovni;
+						kps[1] = prodajni;
+						kps[2] = srednji;
+						
+						return kps;
+					
+					}	
+				}
+			}
+			
+	
+		}
+
+		return kps;
 	}
 
 }
+

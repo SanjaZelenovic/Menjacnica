@@ -13,31 +13,31 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		valute = new LinkedList<Valuta>();
 	}
 
-	public void dodajKurs(GregorianCalendar dat, double prodajniKurs, double kupovniKurs, String nazivValute) {
+	public void dodajKurs(GregorianCalendar dat, double prodajniKurs, double kupovniKurs, String nazivValute) throws NullPointerException {
+		
+		if ( dat == null || nazivValute == null ) {
+			throw new NullPointerException("Datum i naziv ne smeju imati null vrednost!");
+		}
+		
+		Kurs k = new Kurs(prodajniKurs, kupovniKurs, dat);
+		
 		
 		for (int i = 0; i < valute.size() ; i++) {
 			
 
 			if ( valute.get(i).getNaziv().equals(nazivValute) ) {
 				
-				for (int j = 0; j < valute.get(i).kursevi.size(); j++) {
-					
-					if ( valute.get(i).kursevi.get(j).getDatum().equals(dat) ) {
-						
-						valute.get(i).kursevi.get(j).setKupovniK(kupovniKurs);
-						valute.get(i).kursevi.get(j).setProdajniK(prodajniKurs);
-						
-						return;
-						
-					}
-					
-				}
+				valute.get(i).kursevi.addLast(k);
 			}
 		}
-	}
+	} 
 
 
-	public void obrisiKurs(GregorianCalendar dat, String nazivValute) {
+	public void obrisiKurs(GregorianCalendar dat, String nazivValute) throws NullPointerException {
+		
+		if ( dat == null || nazivValute == null ) {
+			throw new NullPointerException("Datum i naziv ne smeju imati null vrednost!");
+		}
 
 		for (int i = 0; i < valute.size() ; i++) {
 			
@@ -47,8 +47,7 @@ public class Menjacnica implements MenjacnicaInterfejs {
 					
 					if ( valute.get(i).kursevi.get(j).getDatum().equals(dat) ) {
 						
-						valute.get(i).kursevi.get(j).setKupovniK(0);
-						valute.get(i).kursevi.get(j).setProdajniK(0);
+						valute.get(i).kursevi.remove(valute.get(i).kursevi.get(j));
 						
 						return;
 						
@@ -61,7 +60,11 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		
 
 
-	public double[] vratiKurs(GregorianCalendar dat, String nazivValute) {
+	public double[] vratiKurs(GregorianCalendar dat, String nazivValute) throws NullPointerException {
+		
+		if ( dat == null || nazivValute == null ) {
+			throw new NullPointerException("Datum i naziv ne smeju imati null vrednost!");
+		}
 		
 		double [] kps = new double [3];
 		
@@ -90,7 +93,12 @@ public class Menjacnica implements MenjacnicaInterfejs {
 	
 		}
 
+		kps[0] = -1;
+		kps[1] = -1;
+		kps[2] = -1;
+		
 		return kps;
+		
 	}
 
 }

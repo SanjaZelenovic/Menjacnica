@@ -37,6 +37,11 @@ public class TestMenjacnica {
 		double l = m.valute.getFirst().kursevi.getFirst().getSrednjiK();
 		System.out.println(l);
 
+		
+		m.dodajKurs(d, 456, 788, "evro");
+		
+		m.vratiKurs(d, "evro");
 	}
+	
 
 }
